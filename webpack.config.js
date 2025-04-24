@@ -44,7 +44,9 @@ module.exports = (env, argv) => {
                 }
             })]
         },
-
+        output: {
+            publicPath: './',
+        },
         module: {
             rules: [
                 {
