@@ -19,7 +19,71 @@
     <!-- Nhúng SDK build từ dist -->
     <script src="./pixi-sdk.umd.js"></script>
     <script>
-        WOF.initialize("_pixi-content");
+           const config = {
+      gameId: "fortune_wheel",
+      values: {
+        gameTitle: {
+          text: "Vòng Quay May Mắn",
+          fontSize: 36,
+          fontFamily: "Pacifico",
+          color: "#ff3300"
+        },
+        backgroundImage: {
+          source: "cdn",
+          cdnLink: "https://gamestag-cdn.taptap.com.vn/media/images/upload/9d8c7ba5-8e07-4857-9167-2c41a309bab9.jpg"
+        },
+        currencyImage: {
+          source: "cdn",
+          cdnLink: "https://upload.wikimedia.org/wikipedia/vi/d/d0/Dogecoin_Logo.png"
+        },
+        logoImage: {
+          source: "cdn",
+          cdnLink: "https://upload.wikimedia.org/wikipedia/vi/d/d0/Dogecoin_Logo.png"
+        },
+        startButton: {
+          text: "Quay Ngay",
+          textColor: "#ffffff",
+          backgroundColor: "#28a745",
+          backgroundImage: {
+            source: "base64",
+            base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+          }
+        },
+        wheel: {
+          segmentCount: 8,
+          radius: 250,
+          segmentColors: [
+            "#f44336", "#e91e63", "#9c27b0", "#2196f3",
+            "#4caf50", "#ff9800", "#ffc107", "#795548"
+          ],
+          segmentTexts: [
+            "10 Coins", "Better Luck Next Time", "50 Coins", "Try Again",
+            "100 Coins", "Big Win", "Free Spin", "20 Coins"
+          ],
+          segmentImages: [
+            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png",
+            "",
+            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png",
+            "",
+            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png",
+            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png",
+            "",
+            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png"
+          ]
+        },
+        spinButton: {
+          text: "QUAY",
+          textColor: "#ffffff",
+          backgroundColor: "#ff5722",
+          backgroundImage: {
+            source: "cdn",
+            cdnLink: "https://gamestag-cdn.taptap.com.vn/media/images/upload/c05e525d-95e8-4b19-93a6-f75abfd47442.png"
+          }
+        }
+      }
+    }
+
+    WOF.initialize("_pixi-content", config);
 
         document.getElementById('cta-button').addEventListener('click', function () {
         if (typeof FbPlayableAd !== 'undefined' && FbPlayableAd.onCTAClick) {
