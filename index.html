@@ -1,97 +1,161 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Test PIXI SDK</title>
-    <style>
-        html, body {
-          margin: 0;
-          padding: 0;
-          height: 100%;
-          background-color: aquamarine;  
-        }
-      </style>
-      <script src="https://www.facebook.com/playablead/playablead-sdk.js"></script>
 
-  </head>
-  <body>
-    <div id="_pixi-content"></div>
+<head>
+  <title>Test PIXI SDK</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: aquamarine;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-    <!-- Nhúng SDK build từ dist -->
-    <script src="./pixi-sdk.umd.js"></script>
-    <script>
-           const config = {
+    #spinBtn {
+      position: absolute;
+      bottom: 50px;
+      width: 200px;
+      height: 50px;
+      border-radius: 10px;
+      border-width: 2px;
+      border-color: black;
+      background-color: pink;
+    }
+
+    #historyBtn {
+      position: absolute;
+      top: 100px;
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+      border-width: 2px;
+      border-color: black;
+      background-color: wheat;
+      right: 30%;
+      font-size: 32px;
+    }
+  </style>
+  <script src="https://www.facebook.com/playablead/playablead-sdk.js"></script>
+  <script src="./pixi-sdk.umd.js"></script>
+</head>
+
+<body>
+  <div id="_pixi-content"></div>
+  <button id="spinBtn" onclick="handleSpinClick()">QUAY</button>
+  <button id="historyBtn" onclick="handleHistoryClick()">🎁</button>
+
+  <!-- Nhúng SDK build từ dist -->
+  <script>
+    const config = {
       gameId: "fortune_wheel",
       values: {
-        gameTitle: {
-          text: "Vòng Quay May Mắn",
-          fontSize: 36,
-          fontFamily: "Pacifico",
-          color: "#ff3300"
-        },
-        backgroundImage: {
-          source: "cdn",
-          cdnLink: "https://gamestag-cdn.taptap.com.vn/media/images/upload/9d8c7ba5-8e07-4857-9167-2c41a309bab9.jpg"
-        },
-        currencyImage: {
-          source: "cdn",
-          cdnLink: "https://upload.wikimedia.org/wikipedia/vi/d/d0/Dogecoin_Logo.png"
-        },
         logoImage: {
           source: "cdn",
           cdnLink: "https://upload.wikimedia.org/wikipedia/vi/d/d0/Dogecoin_Logo.png"
         },
-        startButton: {
-          text: "Quay Ngay",
-          textColor: "#ffffff",
-          backgroundColor: "#28a745",
-          backgroundImage: {
-            source: "base64",
-            base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
-          }
-        },
         wheel: {
+          imageMode: false,
+          imageUrl: "",
           segmentCount: 8,
           radius: 250,
-          segmentColors: [
-            "#f44336", "#e91e63", "#9c27b0", "#2196f3",
-            "#4caf50", "#ff9800", "#ffc107", "#795548"
-          ],
-          segmentTexts: [
-            "10 Coins", "Better Luck Next Time", "50 Coins", "Try Again",
-            "100 Coins", "Big Win", "Free Spin", "20 Coins"
-          ],
-          segmentImages: [
-            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png",
-            "",
-            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png",
-            "",
-            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png",
-            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png",
-            "",
-            "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png"
+          segmentItems: [
+            {
+              id: "id-item-1",
+              text: "10 Coins",
+              color: "#f44336",
+              image: "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png"
+            },
+            {
+              id: "id-item-2",
+              text: "Better Luck Next Time",
+              color: "#e91e63",
+              image: ""
+            },
+            {
+              id: "id-item-3",
+              text: "50 Coins",
+              color: "#9c27b0",
+              image: "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png"
+            },
+            {
+              id: "id-item-4",
+              text: "Try Again",
+              color: "#e91e63",
+              image: "#2196f3"
+            },
+            {
+              id: "id-item-5",
+              text: "100 Coins",
+              color: "#4caf50",
+              image: "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png"
+            },
+            {
+              id: "id-item-6",
+              text: "Big Win",
+              color: "#ff9800",
+              image: "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png"
+            },
+            {
+              id: "id-item-7",
+              text: "Free Spin",
+              color: "#ffc107",
+              image: ""
+            },
+            {
+              id: "id-item-8",
+              text: "20 Coins",
+              color: "#795548",
+              image: "https://game-cdn.taptap.com.vn/media/images/upload/3550eb48-94a6-4d97-97b6-a7e635cc4359.png"
+            },
           ]
         },
-        spinButton: {
-          text: "QUAY",
-          textColor: "#ffffff",
-          backgroundColor: "#ff5722",
-          backgroundImage: {
-            source: "cdn",
-            cdnLink: "https://gamestag-cdn.taptap.com.vn/media/images/upload/c05e525d-95e8-4b19-93a6-f75abfd47442.png"
-          }
-        }
       }
     }
 
     WOF.initialize("_pixi-content", config);
 
-        document.getElementById('cta-button').addEventListener('click', function () {
-        if (typeof FbPlayableAd !== 'undefined' && FbPlayableAd.onCTAClick) {
-          FbPlayableAd.onCTAClick(); 
-        } else {
-          console.log('FbPlayableAd.onCTAClick() không khả dụng ngoài Facebook Ads.');
-        }
+    document.getElementById('cta-button')?.addEventListener('click', function () {
+      if (typeof FbPlayableAd !== 'undefined' && FbPlayableAd.onCTAClick) {
+        FbPlayableAd.onCTAClick();
+      } else {
+        console.log('FbPlayableAd.onCTAClick() không khả dụng ngoài Facebook Ads.');
+      }
+    });
+
+    function handleSpinClick() {
+      const gifts = config.values.wheel.segmentItems;
+      const random = Math.floor(Math.random() * gifts.length);
+      WOF.spin(gifts[random], () => {
+        document.getElementById("spinBtn").style.display = "inline-block";
+        document.getElementById("historyBtn").style.display = "inline-block";
+        WOF.reloadData(config);
       });
-    </script>
-  </body>
+
+      document.getElementById("spinBtn").style.display = "none";
+      document.getElementById("historyBtn").style.display = "none";
+    }
+
+
+    function handleHistoryClick() {
+      const gifts = config.values.wheel.segmentItems;
+      const random = Math.floor(Math.random() * gifts.length);
+      const listHistory = [
+        {
+          value: gifts[random],
+          getTime: new Date().getTime()
+        }
+      ];
+
+      WOF.openHistory(listHistory);
+
+      document.getElementById("spinBtn").style.display = "none";
+      document.getElementById("historyBtn").style.display = "none";
+    }
+  </script>
+</body>
+
 </html>
